@@ -10,7 +10,11 @@ st.caption("Paste a YouTube link — Gemini will timestamp every brand, product,
 
 with st.sidebar:
     st.header("Setup")
-    api_key = st.secrets.get("GEMINI_API_KEY", "") or os.environ.get("GEMINI_API_KEY", "")
+    try:
+        api_key = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        api_key = ""
+    api_key = api_key or os.environ.get("GEMINI_API_KEY", "")
     st.markdown("---")
     st.markdown("**How it works:**")
     st.markdown("1. Enter your Gemini API key")
